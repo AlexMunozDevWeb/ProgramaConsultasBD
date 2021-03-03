@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Acceso a la base de datos</title>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Oxygen&family=Ubuntu:ital,wght@0,300;0,500;0,700;1,300&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body class="body-login">
+  <main class="centrar-contenido">
+    <article class="card">
+
+      <img src="img/logo.jpg" alt="" class="card-header m-2">
+      <div class="card-body">
+
+        <form method="post" action="procesar.php">
+          <div class="form-group">
+            <label for="username">Servidor:*</label>
+            <input type="text" class="form-control" name="server" id="server" placeholder="Escribe el servidor" required>
+          </div>
+          <div class="form-group">
+            <label for="pass">Base de datos:*</label>
+            <input type="text" class="form-control" name="database" id="pass" placeholder="Escribe la base de datos" required>
+          </div>
+          <div class="form-group">
+            <label for="username">Usuario:*</label>
+            <input type="text" class="form-control" name="user" id="usuario" placeholder="Escribe el nombre de usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="pass">Contraseña:</label>
+            <input type="password" class="form-control" name="pass" id="pass" placeholder="Escribe la contraseña">
+          </div>
+          <div class="form-group text-center m-0">
+            <button type="submit" name="conectar" class="btn btn-success btn-lg m-2">Conectar</button>
+          </div>
+        </form>
+
+      </div>
+    </article>
+  </main>
+</body>
+
+</html>

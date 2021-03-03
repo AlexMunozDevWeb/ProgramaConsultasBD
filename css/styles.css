@@ -1,0 +1,94 @@
+/*
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template/shop-homepage)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+/* 
+1. Estilos globales
+2. Login
+3. Registro
+*/
+
+/********** 1. CLASES GLOBALES  **********/
+body {
+  /* font-family: "Oxygen", sans-serif; */
+  /* font-family: "Open Sans", sans-serif;
+  font-family: "Oxygen", sans-serif;*/
+  font-family: "Ubuntu", sans-serif; 
+}
+html {
+  box-sizing: border-box;
+  /* rem --> toma la referencia el HTML
+  default 16px - em(referencia del contenedor padre)
+  para que podamos asignar 1rem =  10px */
+  /* font-size: 62.5%; */
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+* {
+  font-size: 1rem;
+}
+.boton {
+  background-color: #a3bb42;
+  color: #fff;
+}
+.boton:hover {
+  background-color: #869b36;
+  color: #fff;
+}
+.boton-buscar {
+  background-color: #289dcc;
+}
+.boton-buscar i {
+  background-color: #289dcc;
+  transition: ease-in 0.3s;
+}
+.boton-buscar i:hover {
+  background-color: #289dcc;
+  color: #343a40 !important;
+}
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/********** 2. LOGIN **********/
+.body-login {
+  background-color: hsl(185, 75%, 39%);;
+  background-image: url("../img/bg-pattern-top.svg"),
+    url("../img/bg-pattern-bottom.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 50vw bottom 50vh, left 50vw top 50vh;
+}
+.centrar-contenido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  max-width: 600px!important;
+}
+.card-header {
+  padding: 0;
+}
+
+/********** 2. SCROLL CONSULTA **********/
+.modal-personalizado {
+  height: 50vh;
+  overflow-y: auto;
+}
