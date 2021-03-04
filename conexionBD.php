@@ -45,5 +45,46 @@
               
         $conexion->close();
     }
+
+    function modificacionDB($servername, $username, $pass, $db, $sql){
+        // Crear Conexion
+        $conexion = new mysqli($servername, $username, $pass, $db);
+        
+        //Comprobar conexion
+        if($conexion->connect_error){
+            header('Location: index.html');
+            //die("Conexion fallida: ".$conexion->connect_error);
+        }else{
+            $_SESSION['error'] = ''; // Para vaciar el error de la consulta
+            if (mysqli_query($conexion, $sql)) {
+                echo "Modificacion correcta."; 
+            } else {
+                echo "<p class='text-danger'>Error en la sintaxis:</br> " . mysqli_error($conexion) . '</p>'; 
+            }
+            $conexion->close();
+        }
+    }
     
+    function multiqueryDB($servername, $username, $pass, $db, $sql){
+        // Crear Conexion
+        $conexion = new mysqli($servername, $username, $pass, $db);
+        
+        //Comprobar conexion
+        if($conexion->connect_error){
+            header('Location: index.html');
+            //die("Conexion fallida: ".$conexion->connect_error);
+        }else{
+            $_SESSION['error'] = ''; // Para vaciar el error de la consulta
+            if (mysqli_multi_query($conexion, $sql)) { 
+                echo "Multiquery creada correctamente.";
+            } else { 
+                echo "<p class='text-danger'>Error en la sintaxis:</br> " . mysqli_error($conexion) . '</p>'; 
+            }
+            $conexion->close();
+        }
+    } 
+    
+
+    
+
 ?>

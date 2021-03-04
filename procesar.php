@@ -54,12 +54,22 @@
         <form method="post" action="procesar.php">
 
           <div class="form-group">
-            <label for="username">Consulta:</label>
-            <textarea class="form-control" name="textConsulta" id="exampleFormControlTextarea1" rows="3" require></textarea>
+            <label for="inputState">Tipo de query:</label>
+            <select id="inputState" class="form-control" name="seleccionQuery">
+              <option value="select">Consultas</option>
+              <option value="insert">Inserccion / modificacion</option>
+              <option value="multiquery">Multiquery</option>
+            </select>
           </div>
 
+          <div class="form-group">
+            <label for="username">Sintaxis de la query:</label>
+            <textarea class="form-control" name="textConsulta" id="exampleFormControlTextarea1" rows="3" require></textarea>
+          </div>
+          
+
           <div class="form-group text-center m-0">
-            <button type="submit" name="consulta" class="btn btn-success btn-lg m-2">Consulta</button>
+            <button type="submit" name="consulta" class="btn btn-success btn-lg m-2">Realizar</button>
             <button type="submit" name="desconectar" class="btn btn-danger btn-lg m-2">Desconectar</button>
           </div>
 
@@ -67,12 +77,44 @@
         
         <?php 
             if(isset($_POST['consulta'])){
-                if(!empty($_POST['textConsulta'])){
-                  $sql = $_POST['textConsulta'];
-                  consultaDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
-                }else{
-                   $_SESSION['error'] = 'Consulta vacia.';
-                }
+              $sql = $_POST['textConsulta'];
+
+              switch ($_POST['seleccionQuery']) {
+
+                //SELECT CONSULTAS
+                case 'select':
+                  if(!empty($_POST['textConsulta'])){
+                    consultaDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
+                    //$_SESSION['error'] = '';
+                  }else{
+                     $_SESSION['error'] = 'Consulta vacia.';
+                  }
+                  break;
+
+                //CREATE, INSERT, DROP, UPDATE, ALTER...
+                case 'insert':
+                  if(!empty($_POST['textConsulta'])){
+                    modificacionDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
+                    //$_SESSION['error'] = '';
+                  }else{
+                     $_SESSION['error'] = 'Consulta vacia.';
+                  }
+                  break;
+
+                case 'multiquery':
+                  if(!empty($_POST['textConsulta'])){
+                    multiqueryDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
+                    //$_SESSION['error'] = '';
+                  }else{
+                     $_SESSION['error'] = 'Consulta vacia.';
+                  }
+                  break;
+                
+                default:
+                  echo 'Selecciona el tipo de query';
+                  break;
+              }
+
             }
         ?>
         <p class="text-danger">
