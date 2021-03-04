@@ -1,7 +1,11 @@
 <?php
-    require_once('conexionBD.php');
     
     session_start();
+
+    require('conexionBD.php');
+    
+    $arrayOpciones = array('Select','Insert','Multiquery');
+    // var_dump($arrayOpciones);
 
     if(isset($_POST['conectar'])){
           $_SESSION['server'] = $_POST['server'];
@@ -56,10 +60,19 @@
           <div class="form-group">
             <label for="inputState">Tipo de query:</label>
             <select id="inputState" class="form-control" name="seleccionQuery">
-              <option value="select">Consultas</option>
-              <option value="insert">Inserccion / modificacion</option>
-              <option value="multiquery">Multiquery</option>
+
+              <?php 
+                for($i=0; $i < count($arrayOpciones); $i++){
+                  if(isset($_SESSION['opcionSelect']) && $_SESSION['opcionSelect'] == $arrayOpciones[$i]){
+                    echo '<option value="'.$arrayOpciones[$i].'" selected>'.$arrayOpciones[$i].'</option>';
+                  }else{                   
+                    echo '<option value="'.$arrayOpciones[$i].'">'.$arrayOpciones[$i].'</option>';
+                  }
+                }
+              ?>
+              
             </select>
+
           </div>
 
           <div class="form-group">
@@ -77,44 +90,14 @@
         
         <?php 
             if(isset($_POST['consulta'])){
-              $sql = $_POST['textConsulta'];
-
-              switch ($_POST['seleccionQuery']) {
-
-                //SELECT CONSULTAS
-                case 'select':
-                  if(!empty($_POST['textConsulta'])){
-                    consultaDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
-                    //$_SESSION['error'] = '';
-                  }else{
-                     $_SESSION['error'] = 'Consulta vacia.';
-                  }
-                  break;
-
-                //CREATE, INSERT, DROP, UPDATE, ALTER...
-                case 'insert':
-                  if(!empty($_POST['textConsulta'])){
-                    modificacionDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
-                    //$_SESSION['error'] = '';
-                  }else{
-                     $_SESSION['error'] = 'Consulta vacia.';
-                  }
-                  break;
-
-                case 'multiquery':
-                  if(!empty($_POST['textConsulta'])){
-                    multiqueryDB($_SESSION['server'],$_SESSION['user'],$_SESSION['pass'],$_SESSION['database'],$sql);
-                    //$_SESSION['error'] = '';
-                  }else{
-                     $_SESSION['error'] = 'Consulta vacia.';
-                  }
-                  break;
-                
-                default:
-                  echo 'Selecciona el tipo de query';
-                  break;
+              $_SESSION['opcionSelect'] = $_POST['seleccionQuery'];
+               
+              if(empty($_POST['textConsulta'])){
+                $_SESSION['error'] = 'Consulta vacia.';
+              }else{
+                $_SESSION['error'] = '';
+                manipulacionDB($_SESSION['server'], $_SESSION['user'], $_SESSION['pass'], $_SESSION['database'], $_POST['textConsulta'], $_POST['seleccionQuery']);
               }
-
             }
         ?>
         <p class="text-danger">
